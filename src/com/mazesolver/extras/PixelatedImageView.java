@@ -1,4 +1,4 @@
-package com.mazesolver.main;
+package com.mazesolver.extras;
 
 import com.sun.javafx.sg.prism.NGImageView;
 import com.sun.javafx.sg.prism.NGNode;

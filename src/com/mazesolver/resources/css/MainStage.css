@@ -1,0 +1,13 @@
+.hbox-group {
+	-fx-background-color: #dee0e2;
+}
+
+.top-Buttons{
+	-fx-background-radius: 0;
+	-fx-background-color: #dee0e2;
+	
+	
+}
+.top-Buttons:hover{
+	-fx-background-color: gray;
+}
