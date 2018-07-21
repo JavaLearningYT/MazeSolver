@@ -1,4 +1,5 @@
 #MazeSolver
+
 This project will allow you to upload a picture of a maze to the tool then solve it using the tool
 
 1:First open the application and load a image using the load button at the bottom of the app
