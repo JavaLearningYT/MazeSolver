@@ -8,7 +8,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.awt.Color;
 import javax.imageio.ImageIO;
-
 import com.mazesolver.extras.PixelatedImageView;
 import com.mazesolver.extras.Solver;
 import com.mazesolver.listener.StatusListener;
@@ -44,7 +43,6 @@ public class MainController {
 	private int lines;
 	private File file;
 	private int space;
-	private String oLocation;
 	private int click;
 	
 	PixelatedImageView iv = new PixelatedImageView();
@@ -92,6 +90,7 @@ public class MainController {
 
     @FXML
     void load(ActionEvent event) {
+    	reset(null);
     	FileChooser chooser = new FileChooser();
     	String check = fileLocation.getText();
     	if(new File(check).exists()) {
@@ -137,7 +136,30 @@ public class MainController {
 
     @FXML
     void save(ActionEvent event) {
+    	FileChooser saver = new FileChooser();
+    	//saver.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Images","*.gif","*.png","*.jpg","*.jpeg"));
+    	saver.setInitialDirectory(this.file.getParentFile());
 
+        saver.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Images", "*.*"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png"),
+                new FileChooser.ExtensionFilter("GIF", "*.gif"),
+                new FileChooser.ExtensionFilter("JPEG", "*.jpeg")
+            );
+    	saver.setInitialFileName("solved."+this.file.toString().substring(file.toString().lastIndexOf('.')+1));
+    	if(new File(fileLocation.getText()).exists()) {
+    		saver.setInitialDirectory(new File(fileLocation.getText()).getParentFile());
+    	}
+    	File file = saver.showSaveDialog(new Stage());
+    	System.out.println(file.toString().substring(file.toString().lastIndexOf('.')));
+    	try {
+			System.out.println(ImageIO.write(SwingFXUtils.fromFXImage(tim, null), this.file.toString().substring(file.toString().lastIndexOf('.')+1),file));
+			System.out.println("should work");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     @FXML
