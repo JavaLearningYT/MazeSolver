@@ -88,6 +88,9 @@ public class MainController {
 
     }
 
+    /**
+     * Loads the file
+     */
     @FXML
     void load(ActionEvent event) {
     	reset(null);
@@ -118,6 +121,9 @@ public class MainController {
     	}
     }
 
+    /**
+     * Resets all values to default restarting the process
+     */
     @FXML
     void reset(ActionEvent event) {
     	click=0;
@@ -134,6 +140,9 @@ public class MainController {
     	}
     }
 
+    /**
+     * Saves the solved maze to a location choosen by the user
+     */
     @FXML
     void save(ActionEvent event) {
     	FileChooser saver = new FileChooser();
@@ -162,6 +171,9 @@ public class MainController {
 		}
     }
 
+    /**
+     * Begins the solving of the maze in a separate thread
+     */
     @FXML
     void solve(ActionEvent event) {
     	solveButton.setDisable(true);
@@ -219,6 +231,9 @@ public class MainController {
         setup();
     }
 
+	/**
+	 * Setups the logic for the selection and procesing of the maze
+	 */
 	private void setup() {
 		scrollPane.setContent(iv);
 		iv.setPickOnBounds(true);

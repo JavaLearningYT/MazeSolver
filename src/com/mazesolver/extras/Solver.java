@@ -21,20 +21,42 @@ public class Solver {
 	private int space;
 	private Pair<Integer, Integer> start;
 	private Pair<Integer, Integer> end;
+	
+	/**
+	 * Constructs a solver for the image at this location
+	 * @param location - the location of the image
+	 */
 	public Solver(String location) {
 		this.location=location;
 	}
+	/**
+	 * sets the listener
+	 * @param listener - The listener to be called when the image or status should be updated
+	 */
 	public void setListener(StatusListener listener) {
 		this.listener=listener;
 	}
+	/**
+	 * Sets the start and end points of the maze
+	 * @param start - starting x y pair
+	 * @param end - ending x y pair
+	 */
 	public void setPoints(Pair<Integer,Integer>start,Pair<Integer,Integer> end) {
 		this.start=start;
 		this.end=end;
 	}
-	public void setColors(int lines, int spaces) {
-		this.lines=lines;
+	/**
+	 * Sets the color of the walls and spaces
+	 * @param walls - the color of the walls
+	 * @param spaces - the color of the corridors
+	 */
+	public void setColors(int walls, int spaces) {
+		this.lines=walls;
 		this.space=spaces;
 	}
+	/**
+	 * Begin solving the maze 
+	 */
 	public void execute() {
 		try {
 		image = ImageIO.read(new File(location));
@@ -44,15 +66,13 @@ public class Solver {
 			return;
 		}
 		parse();
-		try {
-			solve();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		solve();
+
 	}
-	private void solve() throws IOException {
+	/**
+	 * Solves the array finding the shortest route from start to end
+	 */
+	private void solve() {
 		listener.updateText("Finding Solution");
 		maze[end.getValue()][end.getKey()] = 0;
 		int on = 0;
@@ -160,16 +180,11 @@ public class Solver {
 		listener.updateImage(SwingFXUtils.toFXImage(image,null));
 	}
 
+	/**
+	 * Parses the image into a array based on pixel colors
+	 */
 	private void parse() {
 		maze = new long[image.getHeight()][image.getWidth()];
-		/*
-		PrintWriter print =null;
-		try {
-			print = new PrintWriter(new File("D:/moutput.txt"));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 		listener.updateText("Parsing Image");
 		Color line = new Color(lines);
 		Color spac = new Color(space);

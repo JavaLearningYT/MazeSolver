@@ -9,9 +9,15 @@ import com.sun.prism.impl.BaseResourceFactory;
 import com.sun.prism.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * @author Austin
+ * Attempts to remove smoothing applied by the image view by default that doesn't get removed by setSmooth(false)
+ *
+ */
 @SuppressWarnings("restriction")
 public class PixelatedImageView extends ImageView {
-    @Override protected NGNode impl_createPeer() {
+
+	@Override protected NGNode impl_createPeer() {
         return new NGImageView() {
             private Image image;
 
